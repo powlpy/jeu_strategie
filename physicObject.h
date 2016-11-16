@@ -3,13 +3,19 @@
 
 #include "archetypeObject.h"
 
-class PhysicObject{
-	const ArchetypeObject& archetype;
+#include <gf/Vector.h>
+#include <gf/Entity.h>
+#include <gf/RenderTarget.h>
 
-	//pos
+class PhysicObject : public gf::Entity{
+	const ArchetypeObject& archetype; // peut etre un pointeur intelligent
+	gf::Vector2i position;
 
 public:
-	PhysicObject(const ArchetypeObject& a/*, pos*/);
+	PhysicObject(const ArchetypeObject& a, const gf::Vector2i& pos);
+	PhysicObject(const PhysicObject& p);
+	void render(gf::RenderTarget& target) const;
+	void update();
 };
 
 #endif

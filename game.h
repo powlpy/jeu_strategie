@@ -1,11 +1,12 @@
 #ifndef	GAME_H
 #define GAME_H
 
-#include <vector>
-
 #include "player.h"
 #include "graphicsManager.h"
 #include "objectsManager.h"
+
+//#include <gf/Model.h>
+#include <vector>
 
 class Game{
 	std::vector<Player> players; // Peut etre modifié par un Array
@@ -13,6 +14,7 @@ class Game{
 	GraphicsManager graphicsManager;
 
 public:
+	Game();
 	void run();
 };
 
