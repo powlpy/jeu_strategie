@@ -4,14 +4,14 @@
 #include <gf/Texture.h>
 //#include <gf/Shape.h>
 #include <gf/Color.h>
+#include <string>
 
 class GraphicsObject{
-	//gf::Texture texture; // plusieurs textures à l'avenir
-	gf::Color4f color; // temporaire
+	gf::Texture texture; // plusieurs textures à l'avenir
 
 public:
-	GraphicsObject(const gf::Color4f& c);
-	gf::Color4f getColor() const;
+	GraphicsObject(const std::string& path);
+	const gf::Texture& getTexture() const;
 
 };
 

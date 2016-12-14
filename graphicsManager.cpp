@@ -6,7 +6,7 @@ GraphicsManager::GraphicsManager(const ObjectsManager& om)
   window("Jeu de stratégie", { 640, 480 }), 
   renderer(window)
 {
-	graphicsObjects.push_back(GraphicsObject(gf::Color::Blue));
+	graphicsObjects.push_back(GraphicsObject("sprite.png"));
 }
 
 

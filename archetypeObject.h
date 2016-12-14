@@ -3,14 +3,17 @@
 
 #include "graphicsObject.h"
 #include <gf/Color.h>
+#include <string>
 
 class ArchetypeObject{
+	std::string name;
 	const GraphicsObject& graphics; // peut etre un pointeur intelligent
 
 public:
-	ArchetypeObject(const GraphicsObject& g);
+	ArchetypeObject(const std::string& _name, const GraphicsObject& _graphic);
+	const std::string& getName() const;
 	const GraphicsObject& getGraphics() const;
-	gf::Color4f getColor() const;
+	//const gf::Texture& getTexture() const;
 };
 
 #endif

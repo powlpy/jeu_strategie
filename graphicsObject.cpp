@@ -1,10 +1,12 @@
 #include "graphicsObject.h"
 
-GraphicsObject::GraphicsObject(const gf::Color4f& c)
-: color(c)
-{}
+GraphicsObject::GraphicsObject(const std::string& path)
+{
+	if (!texture.loadFromFile(path)) {
+    	exit(EXIT_FAILURE);
+ 	}
+}
 
-gf::Color4f GraphicsObject::getColor() const{
-	//return color; // Ne s'affiche pas ou provoque un segfault, à corrigé
-	return gf::Color::Blue;
+const gf::Texture& GraphicsObject::getTexture() const{
+	return &texture;
 }

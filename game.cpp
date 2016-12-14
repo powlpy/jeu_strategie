@@ -10,8 +10,8 @@
 Game::Game()
 : graphicsManager(objectsManager)
 {
-  players.push_back(Player());
-  ArchetypeObject a(graphicsManager.getGraphicsObject()[0]);
+  //players[0] = Player();
+  ArchetypeObject a("paysan", graphicsManager.getGraphicsObject()[0]);
   objectsManager.addArchetype(a);
   objectsManager.addObject(PhysicObject(a, gf::Vector2i(250, 250)));
 }
