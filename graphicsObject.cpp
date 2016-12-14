@@ -8,5 +8,5 @@ GraphicsObject::GraphicsObject(const std::string& path)
 }
 
 const gf::Texture& GraphicsObject::getTexture() const{
-	return &texture;
+	return texture;
 }
