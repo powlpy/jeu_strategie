@@ -19,7 +19,7 @@ void PhysicObject::render(gf::RenderTarget& target) const{
 
 
 void PhysicObject::update(float dt) {
-    //position += dt * velocity; 
+    position = position + velocity * dt; 
 }
 
 void PhysicObject::setGoal(Vector2d m_goal){
@@ -28,6 +28,7 @@ void PhysicObject::setGoal(Vector2d m_goal){
 
 void PhysicObject::updateVelocity(){
 	velocity = goal - position;
+	velocity = velocity.Normal();
 	//normalize(velocity);
 }
 

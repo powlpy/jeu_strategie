@@ -64,12 +64,12 @@ Vector2d Vector2d::operator-() const
     return Vector2d(-x, -y);
 }
 
-Vector2d Vector2d::operator*(const float& scalar) const
+Vector2d Vector2d::operator*(float scalar) const
 {
     return Vector2d(x*scalar, y*scalar);
 }
 
-Vector2d Vector2d::operator/(const float& scalar) const
+Vector2d Vector2d::operator/(float scalar) const
 {
     return Vector2d(x/scalar, y/scalar);
 }
@@ -84,15 +84,15 @@ float Vector2d::CrossProduct(const Vector2d &a, const Vector2d &b)
     return ((a.x * b.y) - (a.y * b.x));
 }
 
-float Vector2d::Magnitude(const Vector2d &v)
+float Vector2d::Magnitude() const
 {
-    return sqrt((v.x * v.x) + (v.y * v.y));
+    return sqrt((x * x) + (y * y));
 }
 
-Vector2d Vector2d::Normal(const Vector2d &v)
+Vector2d Vector2d::Normal() const
 {
-    float magnitude = Magnitude(v);
-    return Vector2d(v.x / magnitude, v.y / magnitude);
+    float magnitude = Magnitude();
+    return Vector2d(x / magnitude, y / magnitude);
 }
 
 Vector2d Vector2d::Perpendicular(const Vector2d &v)
