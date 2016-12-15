@@ -5,14 +5,21 @@
 //#include <gf/Shape.h>
 #include <gf/Color.h>
 #include <string>
+#include <iostream>
+#include <gf/Sprite.h>
 
 class GraphicsObject{
-	gf::Texture texture; // plusieurs textures à l'avenir
+	//std::unique_ptr<gf::Texture> texture;
+	gf::Texture texture;
 
 public:
+	GraphicsObject();
 	GraphicsObject(const std::string& path);
+	GraphicsObject(GraphicsObject&& other);
+	~GraphicsObject();
+	bool setTexture(const std::string& path);
+	void updateSprite(gf::Sprite& sprite) const;
 	const gf::Texture& getTexture() const;
-
 };
 
 #endif

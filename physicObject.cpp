@@ -14,9 +14,7 @@ void PhysicObject::render(gf::RenderTarget& target) const{
 	sprite.setTexture(archetype.getGraphics().getTexture());
     sprite.setPosition(position);
     sprite.setAnchor(gf::Anchor::Center);
-    std::cout << "a" << std::endl;
     target.draw(sprite);
-    std::cout << "b" << std::endl;
 }
 
 void PhysicObject::update(){

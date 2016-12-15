@@ -11,9 +11,8 @@ Game::Game()
 : graphicsManager(objectsManager)
 {
   //players[0] = Player();
-  ArchetypeObject a("paysan", graphicsManager.getGraphicsObject()[0]);
-  objectsManager.addArchetype(a);
-  objectsManager.addObject(PhysicObject(a, gf::Vector2i(250, 250)));
+  objectsManager.addArchetype("bombe", "sprite.png");
+  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], gf::Vector2i(250, 250)));
 }
 
 void Game::run(){

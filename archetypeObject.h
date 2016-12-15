@@ -7,10 +7,11 @@
 
 class ArchetypeObject{
 	std::string name;
-	const GraphicsObject& graphics; // peut etre un pointeur intelligent
+	GraphicsObject graphics;
 
 public:
-	ArchetypeObject(const std::string& _name, const GraphicsObject& _graphic);
+	ArchetypeObject(const std::string& _name, GraphicsObject&& _graphic);
+	ArchetypeObject(ArchetypeObject&& other);
 	const std::string& getName() const;
 	const GraphicsObject& getGraphics() const;
 	//const gf::Texture& getTexture() const;

@@ -15,7 +15,8 @@ class ObjectsManager{
 public:
 	void render(gf::RenderTarget &target) const;
 	void addObject(const PhysicObject& o);
-	void addArchetype(const ArchetypeObject& a);
+	void addArchetype(const std::string& name, const std::string& path);
+	const std::vector<ArchetypeObject>& getArchetypes() const;
 };
 
 #endif
