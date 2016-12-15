@@ -10,6 +10,8 @@
 #include <gf/RenderTarget.h>
 #include "vector2d.h"
 
+class ArchetypeObject;
+
 class PhysicObject : public gf::Entity{
 	const ArchetypeObject& archetype; // peut etre un pointeur intelligent
 	Vector2d position;
@@ -29,6 +31,7 @@ public:
 	const ArchetypeObject& getArchetype() const;
 	Vector2d getPosition() const;
 	Vector2d getSize() const;
+	//bool createObject(const std::string& archetypeName);
 };
 
 #endif

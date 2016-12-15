@@ -47,4 +47,8 @@ Vector2d PhysicObject::getPosition() const{
 Vector2d PhysicObject::getSize() const{
 	return archetype.getSize();
 }
-
+/*
+bool PhysicObject::createObject(const std::string& archetypeName){
+	// SEGFAULT risque élevé
+	return archetype.createObject(archetypeName, position + Vector2d(0, 20));
+}//*/

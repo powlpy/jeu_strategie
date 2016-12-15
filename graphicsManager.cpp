@@ -3,7 +3,7 @@
 
 GraphicsManager::GraphicsManager(const ObjectsManager& om)
 : objectsManager(om),
-  window("Jeu de stratégie", { 640, 480 }), 
+  window("Jeu de stratégie", { 1380, 800 }), 
   renderer(window)
 {
 	//graphicsObjects.emplace_back("sprite.png");

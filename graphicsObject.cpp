@@ -6,6 +6,7 @@ GraphicsObject::GraphicsObject(const std::string& path)
 {
 	//gf::Texture t;
 	if (!texture.loadFromFile(path)) {
+		std::cerr << "Impossible de chargé la ressource " << path << " : " << __FILE__ << " " << __LINE__ << std::endl;
     	exit(EXIT_FAILURE);
  	}
  	//texture = std::make_unique<gf::Texture>(t);
