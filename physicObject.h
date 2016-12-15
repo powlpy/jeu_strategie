@@ -18,10 +18,14 @@ class PhysicObject : public gf::Entity{
 	Vector2d velocity;
 	Vector2d goal;
 
+	bool alive;
+	bool destroyInNextTic;
 
 public:
 	PhysicObject(const ArchetypeObject& a, const Vector2d& pos);
 	PhysicObject(const PhysicObject& p);
+	PhysicObject& operator=(PhysicObject); // Déclarer à cause de plainte du compilateur
+
 	void render(gf::RenderTarget& target) const;
 
 	void update(float dt);
@@ -32,6 +36,10 @@ public:
 	Vector2d getPosition() const;
 	Vector2d getSize() const;
 	//bool createObject(const std::string& archetypeName);
+
+	bool isAlive() const;
+	bool isDestroyInNextTic() const;
+	void kill();
 };
 
 #endif

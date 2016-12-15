@@ -52,7 +52,13 @@ void Game::run(){
             break;
           case gf::EventType::KeyPressed:
               if(idxObject >= 0){
-                objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], objectsManager.getObject(idxObject).getPosition() + Vector2d(0, 30)));
+                PhysicObject& obj = objectsManager.getObject(idxObject);
+                if(obj.isAlive()){
+                  if(event.key.keycode != gf::Keycode::Backspace)
+                    objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], obj.getPosition() + Vector2d(0, 30)));
+                  else
+                    obj.kill();
+                }
               }
             break;
         default:

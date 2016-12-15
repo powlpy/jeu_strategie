@@ -44,9 +44,18 @@ int ObjectsManager::getIdxObjectByPosition(Vector2d pos){
 }
 
 void ObjectsManager::update(float dt){
-	for(auto& i : objects){
-		i.update(dt);
+	int idxDestroyer = -1;
+	int idx = 0;
+	for(auto& o : objects){
+		if(o.isDestroyInNextTic())
+			idxDestroyer = idx;
+		else
+			o.update(dt);
+		idx++;
 	}
+
+	if(idxDestroyer >= 0)
+		objects.erase(objects.begin() + idxDestroyer);
 }
 
 const ArchetypeObject& ObjectsManager::getArchetype(const std::string& name) const{

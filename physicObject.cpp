@@ -2,24 +2,47 @@
 #include <gf/Shapes.h>
 
 PhysicObject::PhysicObject(const ArchetypeObject& a, const Vector2d& pos)
-: archetype(a), position(pos), velocity(0, 0), goal(pos)
+: archetype(a), position(pos), velocity(0, 0), goal(pos), alive(true), destroyInNextTic(false)
 {}
 
 PhysicObject::PhysicObject(const PhysicObject& p)
-: archetype(p.archetype), position(p.position), velocity(p.velocity), goal(p.goal) 
+: archetype(p.archetype), position(p.position), velocity(p.velocity), goal(p.goal), alive(p.alive), destroyInNextTic(p.destroyInNextTic)
 {}
+
+// Déclarer à cause de plainte du compilateur
+
+PhysicObject& PhysicObject::operator=(PhysicObject other){
+	//std::swap(archetype, other.archetype);
+	std::swap(position, other.position);
+	std::swap(velocity, other.velocity);
+	std::swap(goal, other.goal);
+	std::swap(alive, other.alive);
+	std::swap(destroyInNextTic, other.destroyInNextTic);
+	return *this;
+}
 
 void PhysicObject::render(gf::RenderTarget& target) const{
 	gf::Sprite sprite;
-	sprite.setTexture(archetype.getGraphics().getTexture());
-    sprite.setPosition({position.x, position.y});
-    sprite.setAnchor(gf::Anchor::Center);
-    target.draw(sprite);
+	if(alive){
+		sprite.setTexture(archetype.getGraphics().getTexture());
+	}
+	else{
+		sprite.setTexture(archetype.getGraphics().getTexture()); // TODO
+	}
+
+	sprite.setPosition({position.x, position.y});
+	sprite.setAnchor(gf::Anchor::Center);
+	target.draw(sprite);
 }
 
 void PhysicObject::update(float dt) {
-	updateVelocity();
-    position = (position + (velocity * dt * 20)); 
+	if(alive){
+		updateVelocity();
+	    position = (position + (velocity * dt * 20)); 
+	}
+	else{
+		destroyInNextTic = true; // TODO mettre un temps de mort
+	}
 }
 
 void PhysicObject::setGoal(Vector2d m_goal){
@@ -52,3 +75,15 @@ bool PhysicObject::createObject(const std::string& archetypeName){
 	// SEGFAULT risque élevé
 	return archetype.createObject(archetypeName, position + Vector2d(0, 20));
 }//*/
+
+bool PhysicObject::isAlive() const {
+	return alive;
+}
+
+bool PhysicObject::isDestroyInNextTic() const {
+	return destroyInNextTic;
+}
+
+void PhysicObject::kill() {
+	alive = false;
+}
