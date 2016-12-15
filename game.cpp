@@ -54,10 +54,13 @@ void Game::run(){
               if(idxObject >= 0){
                 PhysicObject& obj = objectsManager.getObject(idxObject);
                 if(obj.isAlive()){
-                  if(event.key.keycode != gf::Keycode::Backspace)
+                  if(event.key.keycode != gf::Keycode::Backspace){
                     objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], obj.getPosition() + Vector2d(0, 30)));
-                  else
+                  }
+                  else{
                     obj.kill();
+                    idxObject = -1;
+                  }
                 }
               }
             break;

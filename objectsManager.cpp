@@ -20,7 +20,7 @@ void ObjectsManager::addArchetype(const std::string& name, const std::string& pa
 const std::vector<ArchetypeObject>& ObjectsManager::getArchetypes() const{
 	return archetypes;
 }
-
+/*
 PhysicObject* ObjectsManager::getObjectByPosition(Vector2d pos){
 	for(auto& i : objects){
 		Vector2d cornerMin = i.getPosition() - i.getSize() / 2;
@@ -29,7 +29,7 @@ PhysicObject* ObjectsManager::getObjectByPosition(Vector2d pos){
 			return &i;
 	}
 	return nullptr;
-}
+}//*/
 
 int ObjectsManager::getIdxObjectByPosition(Vector2d pos){
 	int idx = 0;

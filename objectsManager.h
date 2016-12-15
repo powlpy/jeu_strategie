@@ -23,7 +23,7 @@ public:
 	const std::vector<ArchetypeObject>& getArchetypes() const;
 	const ArchetypeObject& getArchetype(const std::string& name) const;
 
-	PhysicObject* getObjectByPosition(Vector2d pos);
+	//PhysicObject* getObjectByPosition(Vector2d pos);
 	int getIdxObjectByPosition(Vector2d pos);
 	PhysicObject& getObject(int idx);
 	void update(float dt);
