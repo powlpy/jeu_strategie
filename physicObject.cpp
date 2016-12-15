@@ -2,7 +2,7 @@
 #include <gf/Shapes.h>
 
 PhysicObject::PhysicObject(const ArchetypeObject& a, const Vector2d& pos)
-: archetype(a), position(pos), velocity({0,0}), goal(pos)
+: archetype(a), position(pos), velocity(0, 0), goal(pos)
 {}
 
 PhysicObject::PhysicObject(const PhysicObject& p)
@@ -18,7 +18,8 @@ void PhysicObject::render(gf::RenderTarget& target) const{
 }
 
 void PhysicObject::update(float dt) {
-    //position += dt * velocity; 
+	updateVelocity();
+    position = (position + (velocity * dt * 20)); 
 }
 
 void PhysicObject::setGoal(Vector2d m_goal){
@@ -27,7 +28,8 @@ void PhysicObject::setGoal(Vector2d m_goal){
 
 void PhysicObject::updateVelocity(){
 	velocity = goal - position;
-	//normalize(velocity);
+	velocity = velocity.Normal();
+
 }
 
 void PhysicObject::setVelocity(Vector2d m_velocity) {

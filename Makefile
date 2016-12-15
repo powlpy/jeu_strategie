@@ -4,4 +4,4 @@ all : comp
 clean : rm *.o
 
 comp : *.cpp
-	g++ -std=c++11 -c *.cpp -Wall #-Werror
+	g++ -c *.cpp -Wall #-Werror

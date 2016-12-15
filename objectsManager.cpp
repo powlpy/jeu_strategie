@@ -22,11 +22,17 @@ const std::vector<ArchetypeObject>& ObjectsManager::getArchetypes() const{
 }
 
 PhysicObject* ObjectsManager::getObjectByPosition(Vector2d pos){
-	for(auto const& i : objects){
-		gf::Vector2f cornerMin = i.getPosition() - i.getSize() / 2;
-		gf::Vector2f cornerMax = i.getPosition() + i.getSize() / 2;
-		if(pos.x > cornerMin.x && pos.x < cornerMax.x && pos.y > cornerMin.y && pos.y <_cornerMax.y)
+	for(auto& i : objects){
+		Vector2d cornerMin = i.getPosition() - i.getSize() / 2;
+		Vector2d cornerMax = i.getPosition() + i.getSize() / 2;
+		if(pos.x > cornerMin.x && pos.x < cornerMax.x && pos.y > cornerMin.y && pos.y < cornerMax.y)
 			return &i;
 	}
 	return nullptr;
+}
+
+void ObjectsManager::update(float dt){
+	for(auto& i : objects){
+		i.update(dt);
+	}
 }

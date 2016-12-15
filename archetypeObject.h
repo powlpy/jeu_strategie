@@ -2,7 +2,7 @@
 #define ARCHETYPE_OBJECT_H
 
 #include "graphicsObject.h"
-#include <gf/Color.h>
+#include "vector2d.h"
 
 class ArchetypeObject{
 	std::string name;

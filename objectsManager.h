@@ -6,7 +6,7 @@
 #include <vector>
 #include <gf/EntityContainer.h>
 #include <gf/RenderTarget.h>
-#include <gf/Math.h>
+#include "vector2d.h"
 
 class ObjectsManager{
 	std::vector<PhysicObject> objects; // le type peut etre changé
@@ -20,6 +20,7 @@ public:
 	const std::vector<ArchetypeObject>& getArchetypes() const;
 
 	PhysicObject* getObjectByPosition(Vector2d pos);
+	void update(float dt);
 };
 
 #endif

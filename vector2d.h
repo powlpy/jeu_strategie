@@ -41,18 +41,18 @@ public:
     Vector2d operator-() const;
 
     //Apply scalar operations.
-    Vector2d operator*(const float&) const;
-    Vector2d operator/(const float&) const;
+    Vector2d operator*(float) const;
+    Vector2d operator/(float) const;
 
     //Product functions
     static float DotProduct(const Vector2d&, const Vector2d&);
     static float CrossProduct(const Vector2d&, const Vector2d&);
 
     //Returns the length of the vector from the origin.
-    static float Magnitude(const Vector2d&);
+    float Magnitude() const;
 
     //Return the unit vector of the input
-    static Vector2d Normal(const Vector2d&);
+    Vector2d Normal() const;
 
     //Return a vector perpendicular to the left.
     static Vector2d Perpendicular(const Vector2d&);

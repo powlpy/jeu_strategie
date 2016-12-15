@@ -5,6 +5,7 @@
 #include <gf/RenderWindow.h>
 #include <gf/Window.h>
 #include <gf/Shapes.h>
+#include <gf/Clock.h>
 
 
 Game::Game()
@@ -22,6 +23,8 @@ void Game::run(){
 
   PhysicObject* obj = nullptr;
   // Start the game loop
+
+  gf::Clock clock;
   while (window.isOpen()) {
     // Process events
     gf::Event event;
@@ -31,16 +34,23 @@ void Game::run(){
           window.close();
           break;
         case gf::EventType::MouseButtonPressed:
-          if(event.mouseButton.button == gf::MouseButton::Left)
-            obj = objectsManager.getObjectByPosition(event.mouseButton.coords);
+          if(event.mouseButton.button == gf::MouseButton::Left){
+            obj = objectsManager.getObjectByPosition(Vector2d(event.mouseButton.coords.x, event.mouseButton.coords.y));
+          }
           else if(event.mouseButton.button == gf::MouseButton::Right){
-            if(obj != nullptr)
-              obj->setGoal(event.mouseButton.coords);
+            if(obj != nullptr){
+              obj->setGoal(Vector2d(event.mouseButton.coords.x, event.mouseButton.coords.y));
+              std::cout << obj << std::endl;
+            }
           }
         default:
           break;
       }
     }
+
+
+    float dt = clock.restart().asSeconds();
+    objectsManager.update(dt);
 
     renderer.clear(gf::Color::White);
     // Draw the entities

@@ -4,15 +4,22 @@
 #include <gf/Texture.h>
 //#include <gf/Shape.h>
 #include <gf/Color.h>
+#include <string>
+#include <iostream>
+#include <gf/Sprite.h>
 
 class GraphicsObject{
-	//gf::Texture texture; // plusieurs textures à l'avenir
-	gf::Color4f color; // temporaire
+	//std::unique_ptr<gf::Texture> texture;
+	gf::Texture texture;
 
 public:
-	GraphicsObject(const gf::Color4f& c);
-	gf::Color4f getColor() const;
-
+	GraphicsObject();
+	GraphicsObject(const std::string& path);
+	GraphicsObject(GraphicsObject&& other);
+	~GraphicsObject();
+	bool setTexture(const std::string& path);
+	void updateSprite(gf::Sprite& sprite) const;
+	const gf::Texture& getTexture() const;
 };
 
 #endif

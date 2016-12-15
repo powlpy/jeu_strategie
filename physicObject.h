@@ -8,6 +8,7 @@
 #include <gf/Vector.h>
 #include <gf/Entity.h>
 #include <gf/RenderTarget.h>
+#include "vector2d.h"
 
 class PhysicObject : public gf::Entity{
 	const ArchetypeObject& archetype; // peut etre un pointeur intelligent
