@@ -17,7 +17,6 @@ void PhysicObject::render(gf::RenderTarget& target) const{
     target.draw(sprite);
 }
 
-
 void PhysicObject::update(float dt) {
     //position += dt * velocity; 
 }
@@ -34,3 +33,16 @@ void PhysicObject::updateVelocity(){
 void PhysicObject::setVelocity(Vector2d m_velocity) {
 	velocity = m_velocity;
 }
+
+const ArchetypeObject& PhysicObject::getArchetype() const{
+	return archetype;
+}
+
+Vector2d PhysicObject::getPosition() const{
+	return position;
+}
+
+Vector2d PhysicObject::getSize() const{
+	return archetype.getSize();
+}
+

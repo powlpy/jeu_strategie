@@ -10,16 +10,17 @@
 Game::Game()
 : graphicsManager(objectsManager)
 {
-  players.push_back(Player());
-  ArchetypeObject a(graphicsManager.getGraphicsObject()[0]);
-  objectsManager.addArchetype(a);
-  objectsManager.addObject(PhysicObject(a, gf::Vector2d(250, 250)));
+  //players[0] = Player();
+  objectsManager.addArchetype("bombe", "sprite.png", {200, 200});
+  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(250, 250)));
 }
 
 void Game::run(){
 
   gf::RenderWindow& renderer = graphicsManager.getRenderer();
   gf::Window& window = graphicsManager.getWindow();
+
+  PhysicObject* obj = nullptr;
   // Start the game loop
   while (window.isOpen()) {
     // Process events
@@ -29,6 +30,13 @@ void Game::run(){
         case gf::EventType::Closed:
           window.close();
           break;
+        case gf::EventType::MouseButtonPressed:
+          if(event.mouseButton.button == gf::MouseButton::Left)
+            obj = objectsManager.getObjectByPosition(event.mouseButton.coords);
+          else if(event.mouseButton.button == gf::MouseButton::Right){
+            if(obj != nullptr)
+              obj->setGoal(event.mouseButton.coords);
+          }
         default:
           break;
       }

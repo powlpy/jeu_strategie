@@ -5,12 +5,17 @@
 #include <gf/Color.h>
 
 class ArchetypeObject{
-	const GraphicsObject& graphics; // peut etre un pointeur intelligent
+	std::string name;
+	GraphicsObject graphics;
+	Vector2d size;
 
 public:
-	ArchetypeObject(const GraphicsObject& g);
+	ArchetypeObject(const std::string& _name, GraphicsObject&& _graphic, const Vector2d& _size);
+	ArchetypeObject(ArchetypeObject&& other);
+	const std::string& getName() const;
 	const GraphicsObject& getGraphics() const;
-	gf::Color4f getColor() const;
+	//const gf::Texture& getTexture() const;
+	Vector2d getSize() const;
 };
 
 #endif

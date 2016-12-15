@@ -20,10 +20,14 @@ public:
 	PhysicObject(const ArchetypeObject& a, const Vector2d& pos);
 	PhysicObject(const PhysicObject& p);
 	void render(gf::RenderTarget& target) const;
+
 	void update(float dt);
 	void setGoal(Vector2d m_goal);
 	void updateVelocity();
 	void setVelocity(Vector2d m_velocity);
+	const ArchetypeObject& getArchetype() const;
+	Vector2d getPosition() const;
+	Vector2d getSize() const;
 };
 
 #endif
