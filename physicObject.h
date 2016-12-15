@@ -9,13 +9,16 @@
 
 class PhysicObject : public gf::Entity{
 	const ArchetypeObject& archetype; // peut etre un pointeur intelligent
-	gf::Vector2i position;
+	Vector2d position;
 
 public:
-	PhysicObject(const ArchetypeObject& a, const gf::Vector2i& pos);
+	PhysicObject(const ArchetypeObject& a, const Vector2d& pos);
 	PhysicObject(const PhysicObject& p);
 	void render(gf::RenderTarget& target) const;
 	void update();
+	const ArchetypeObject& getArchetype() const;
+	Vector2d getPosition() const;
+	Vector2d getSize() const;
 };
 
 #endif
