@@ -13,6 +13,7 @@ class GraphicsManager{
 	const ObjectsManager& objectsManager; // peut etre un pointeur intelligent
 	gf::Window window;
   	gf::RenderWindow renderer;
+  	gf::WindowHints hints;
 
   	//std::vector<GraphicsObject> graphicsObjects;
 

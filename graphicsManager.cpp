@@ -3,9 +3,10 @@
 
 GraphicsManager::GraphicsManager(const ObjectsManager& om)
 : objectsManager(om),
-  window("Jeu de stratégie", { 1380, 720 }), 
+  window("Jeu de stratégie", { 1300, 700 }, hints), 
   renderer(window)
 {
+	hints.resizable = false;
 	//graphicsObjects.push_back(GraphicsObject(gf::Color::Blue));
 }
 
