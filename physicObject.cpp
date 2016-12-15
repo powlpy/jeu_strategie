@@ -1,12 +1,12 @@
 #include "physicObject.h"
 #include <gf/Sprite.h>
 
-PhysicObject::PhysicObject(const ArchetypeObject& a, const gf::Vector2i& pos)
-: archetype(a), position(pos)
+PhysicObject::PhysicObject(const ArchetypeObject& a, const gf::Vector2f& pos)
+: archetype(a), position(pos), velocity({0,0}), goal(pos)
 {}
 
 PhysicObject::PhysicObject(const PhysicObject& p)
-: archetype(p.archetype), position(p.position)
+: archetype(p.archetype), position(p.position), velocity(p.velocity), goal(p.goal) 
 {}
 
 void PhysicObject::render(gf::RenderTarget& target) const{
@@ -19,16 +19,16 @@ void PhysicObject::render(gf::RenderTarget& target) const{
 
 
 void PhysicObject::update(float dt) {
-    position += dt * velocity; 
+    //position += dt * velocity; 
 }
 
 void PhysicObject::setGoal(gf::Vector2f m_goal){
 	goal = m_goal;
 }
 
-void PhysicObject::UpdateVelocity(){
+void PhysicObject::updateVelocity(){
 	velocity = goal - position;
-	normalize(velocity);
+	//normalize(velocity);
 }
 
 void PhysicObject::setVelocity(gf::Vector2f m_velocity) {

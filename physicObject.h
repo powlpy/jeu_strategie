@@ -15,10 +15,13 @@ class PhysicObject : public gf::Entity{
 
 
 public:
-	PhysicObject(const ArchetypeObject& a, const gf::Vector2i& pos);
+	PhysicObject(const ArchetypeObject& a, const gf::Vector2f& pos);
 	PhysicObject(const PhysicObject& p);
 	void render(gf::RenderTarget& target) const;
-	void update();
+	void update(float dt);
+	void setGoal(gf::Vector2f m_goal);
+	void updateVelocity();
+	void setVelocity(gf::Vector2f m_velocity);
 };
 
 #endif
