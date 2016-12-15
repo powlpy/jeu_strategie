@@ -3,10 +3,10 @@
 
 GraphicsManager::GraphicsManager(const ObjectsManager& om)
 : objectsManager(om),
-  window("Jeu de stratégie", { 640, 480 }), 
+  window("Jeu de stratégie", { 1380, 720 }), 
   renderer(window)
 {
-	graphicsObjects.push_back(GraphicsObject(gf::Color::Blue));
+	//graphicsObjects.push_back(GraphicsObject(gf::Color::Blue));
 }
 
 
@@ -18,6 +18,6 @@ gf::Window& GraphicsManager::getWindow(){
 	return window;
 }
 
-const std::vector<GraphicsObject>& GraphicsManager::getGraphicsObject() const{
-	return graphicsObjects;
-}
+// const std::vector<GraphicsObject>& GraphicsManager::getGraphicsObject() const{
+// 	return graphicsObjects;
+// }
