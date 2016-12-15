@@ -9,7 +9,7 @@
 #include <vector>
 
 class Game{
-	std::array<Player, 2> players;
+	std::vector<Player> players; // Peut etre modifié par un Array
 	ObjectsManager objectsManager;
 	GraphicsManager graphicsManager;
 

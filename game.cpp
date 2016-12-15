@@ -10,9 +10,10 @@
 Game::Game()
 : graphicsManager(objectsManager)
 {
-  //players[0] = Player();
-  objectsManager.addArchetype("bombe", "sprite.png");
-  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], gf::Vector2i(250, 250)));
+  players.push_back(Player());
+  ArchetypeObject a(graphicsManager.getGraphicsObject()[0]);
+  objectsManager.addArchetype(a);
+  objectsManager.addObject(PhysicObject(a, gf::Vector2i(250, 250)));
 }
 
 void Game::run(){

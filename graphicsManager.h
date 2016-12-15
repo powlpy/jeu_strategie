@@ -14,13 +14,13 @@ class GraphicsManager{
 	gf::Window window;
   	gf::RenderWindow renderer;
 
-  	//std::vector<GraphicsObject> graphicsObjects;
+  	std::vector<GraphicsObject> graphicsObjects;
 
 public:
 	GraphicsManager(const ObjectsManager& om);
 	gf::RenderWindow& getRenderer();
 	gf::Window& getWindow();
-	//const std::vector<GraphicsObject>& getGraphicsObject() const;
+	const std::vector<GraphicsObject>& getGraphicsObject() const;
 };
 
 #endif
