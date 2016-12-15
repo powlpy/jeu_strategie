@@ -9,7 +9,10 @@
 
 class PhysicObject : public gf::Entity{
 	const ArchetypeObject& archetype; // peut etre un pointeur intelligent
-	gf::Vector2i position;
+	gf::Vector2f position;
+	gf::Vector2f velocity;
+	gf::Vector2f goal;
+
 
 public:
 	PhysicObject(const ArchetypeObject& a, const gf::Vector2i& pos);

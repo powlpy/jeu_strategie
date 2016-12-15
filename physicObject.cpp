@@ -17,6 +17,20 @@ void PhysicObject::render(gf::RenderTarget& target) const{
     target.draw(sprite);
 }
 
-void PhysicObject::update(){
-	// TODO
+
+void PhysicObject::update(float dt) {
+    position += dt * velocity; 
+}
+
+void PhysicObject::setGoal(gf::Vector2f m_goal){
+	goal = m_goal;
+}
+
+void PhysicObject::UpdateVelocity(){
+	velocity = goal - position;
+	normalize(velocity);
+}
+
+void PhysicObject::setVelocity(gf::Vector2f m_velocity) {
+	velocity = m_velocity;
 }
