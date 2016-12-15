@@ -1,5 +1,5 @@
 #include "game.h"
-
+#include "vector2d.h"
 // C'est un test tout ne devrait pas etre dans le run
 #include <gf/Event.h>
 #include <gf/RenderWindow.h>
@@ -13,7 +13,7 @@ Game::Game()
   players.push_back(Player());
   ArchetypeObject a(graphicsManager.getGraphicsObject()[0]);
   objectsManager.addArchetype(a);
-  objectsManager.addObject(PhysicObject(a, gf::Vector2i(250, 250)));
+  objectsManager.addObject(PhysicObject(a, gf::Vector2d(250, 250)));
 }
 
 void Game::run(){
