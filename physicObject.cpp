@@ -53,14 +53,16 @@ void PhysicObject::render(gf::RenderTarget& target) const{
 
 void PhysicObject::update(ObjectsManager& manager, float dt) {
 	if(alive){
-		if(timeReload >= 0.)
+		if(timeReload >= 0.){
 			timeReload -= dt;
-
-		std::vector<int> vec = manager.getRadius(position, DIST_VISION_ATK_CONTACT);
-		for(const auto& i : vec){
-			PhysicObject& obj = manager.getObject(i);
-			if(obj.getPlayer() != 0 && obj.getPlayer() != getPlayer()){
-				attack(obj);
+		}
+		else{
+			std::vector<int> vec = manager.getRadius(position, DIST_VISION_ATK_CONTACT);
+			for(const auto& i : vec){
+				PhysicObject& obj = manager.getObject(i);
+				if(obj.getPlayer() != 0 && obj.getPlayer() != getPlayer()){
+					attack(manager, obj);
+				}
 			}
 		}
 
@@ -133,11 +135,13 @@ void PhysicObject::receiveDegats(const PhysicObject& attacker/*enum type*/){
 	receiveDegats(attacker.getArchetype().getAttackContact());
 }
 
-void PhysicObject::attack(PhysicObject& other){
+void PhysicObject::attack(ObjectsManager& manager, PhysicObject& other){
 	if((position - other.getPosition()).Magnitude() < DIST_ATK_CONTACT){
 		if(timeReload <= 0.){
 			other.receiveDegats(*this);
 			timeReload = archetype.getReloadContact();
+			manager.addEffect(other.getPosition());
+			std::cout << "a" << std::endl;
 		}
 	}
 	else{

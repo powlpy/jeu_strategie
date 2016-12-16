@@ -18,11 +18,11 @@ Game::Game()
   ArchetypeObject a("mage1", "Sprites/Unit/medievalUnit_07.png", Vector2d(30, 30), 1);
   a.addModuleMoveable(30.);
   a.addModuleLife(6);
-  a.addModuleAttackContact(1, 0.5f);
+  a.addModuleAttackContact(1, 1.f);
   ArchetypeObject b("mage2", "Sprites/Unit/medievalUnit_01.png", Vector2d(30, 30), 2);
   b.addModuleMoveable(30.);
   b.addModuleLife(6);
-  b.addModuleAttackContact(1, 0.5f);
+  b.addModuleAttackContact(1, 1.f);
 
   objectsManager.addArchetype(std::move(a));
   objectsManager.addArchetype(std::move(b));

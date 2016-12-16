@@ -6,6 +6,10 @@ void ObjectsManager::render(gf::RenderTarget &target) const{
 	for(auto const& i : objects){
 		i.render(target);
 	}
+
+	for(auto const& i : effects){
+		i.render(target);
+	}
 }
 
 void ObjectsManager::addObject(const PhysicObject& o){
@@ -63,6 +67,16 @@ void ObjectsManager::update(float dt){
 	if(idxDestroyed >= 0){
 		objects.erase(objects.begin() + idxDestroyed);
 	}
+
+	for(uint i = 0; i != effects.size();){
+		effects[i].update(dt);
+		if(effects[i].getDuration() <= 0.){
+			effects.erase(effects.begin() + i);
+		}
+		else{
+			i++;
+		}
+	}
 }
 
 const ArchetypeObject& ObjectsManager::getArchetype(const std::string& name) const{
@@ -93,6 +107,11 @@ std::vector<int> ObjectsManager::getRadius(Vector2d pos, int radius) const{
 	}
 	return vec;
 }
+
+void ObjectsManager::addEffect(Vector2d pos){
+	effects.push_back(Effect(pos));
+}
+
 /*
 int ObjectsManager::getMinRadius(Vector2d pos, int radius) const{
 	for(int i = 0; i != objects.size(); i++){

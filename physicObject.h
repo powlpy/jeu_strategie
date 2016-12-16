@@ -50,7 +50,7 @@ public:
 	void receiveDegats(int degats);
 	void receiveDegats(const PhysicObject& attacker/*enum type*/);
 	int getPlayer() const;
-	void attack(PhysicObject& other);
+	void attack(ObjectsManager& manager, PhysicObject& other);
 };
 
 #endif

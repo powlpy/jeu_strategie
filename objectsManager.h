@@ -7,6 +7,7 @@
 #include <gf/EntityContainer.h>
 #include <gf/RenderTarget.h>
 #include "vector2d.h"
+#include "effect.h"
 
 class PhysicObject;
 class ArchetypeObject;
@@ -16,6 +17,8 @@ class ObjectsManager{
 	//gf::EntityContainer entitys; // héritage ??? doublon ???
 	std::vector<ArchetypeObject> archetypes; // le type peut etre changé
 	int idxDestroyed;
+
+	std::vector<Effect> effects;
 
 public:
 	void render(gf::RenderTarget &target) const;
@@ -32,6 +35,7 @@ public:
 	std::vector<int> getRadius(Vector2d pos, int radius) const;
 	//std::vector<int> getMinRadius(Vector2d pos, int radius) const;
 	int getDestroyedObject() const{return idxDestroyed;}
+	void addEffect(Vector2d pos);
 };
 
 #endif
