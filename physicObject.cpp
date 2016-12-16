@@ -8,6 +8,7 @@ PhysicObject::PhysicObject(const ArchetypeObject& a, const Vector2d& pos)
   goal(pos), 
   alive(true), 
   destroyInNextTic(false), 
+  life(a.getLife()),
   timeReload(0.)
 {}
 
@@ -50,7 +51,7 @@ void PhysicObject::render(gf::RenderTarget& target) const{
 void PhysicObject::update(float dt) {
 	if(alive){
 		updateVelocity();
-	    position = (position + (velocity * dt * 20)); 
+	    position = (position + (velocity * dt * archetype.getSpeed())); 
 	}
 	else{
 		destroyInNextTic = true; // TODO mettre un temps de mort
@@ -98,4 +99,15 @@ bool PhysicObject::isDestroyInNextTic() const {
 
 void PhysicObject::kill() {
 	alive = false;
+}
+
+void PhysicObject::receiveDegats(int degats){
+	life -= degats;
+	if(life <= 0){
+		alive = false;
+	}
+}
+
+void PhysicObject::receiveDegats(const PhysicObject& attacker/*enum type*/){
+	receiveDegats(attacker.getArchetype().getAttackContact());
 }

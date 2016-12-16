@@ -20,6 +20,8 @@ class PhysicObject : public gf::Entity{
 
 	bool alive;
 	bool destroyInNextTic;
+
+	int life;
 	float timeReload;
 
 public:
@@ -41,6 +43,8 @@ public:
 	bool isAlive() const;
 	bool isDestroyInNextTic() const;
 	void kill();
+	void receiveDegats(int degats);
+	void receiveDegats(const PhysicObject& attacker/*enum type*/);
 };
 
 #endif

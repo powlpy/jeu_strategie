@@ -15,7 +15,9 @@ Game::Game()
 : graphicsManager(objectsManager)
 {
   //players[0] = Player();
-  objectsManager.addArchetype("bombe", "medievalUnit_01.png", {50, 50});
+  ArchetypeObject& a = objectsManager.addArchetype("mage1", "medievalUnit_01.png", Vector2d(30, 30));
+  a.addModuleMoveable(30.);
+
   objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(250, 250)));
   objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(350, 250)));
   objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(250, 350)));
@@ -106,7 +108,7 @@ void Game::run(){
     renderer.draw(ui1);
     renderer.draw(ui2);
     renderer.draw(ui3);
-    
+
     gf::RectangleShape rect({10, 10});
     rect.setColor(gf::Color::Red);
     rect.setPosition(mousePosition);

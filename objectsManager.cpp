@@ -13,9 +13,15 @@ void ObjectsManager::addObject(const PhysicObject& o){
 	//entitys.addEntity(objects[objects.size() - 1]);
 }
 
-void ObjectsManager::addArchetype(const std::string& name, const std::string& path, const Vector2d& size){
+ArchetypeObject& ObjectsManager::addArchetype(const std::string& name, const std::string& path, const Vector2d& size){
 	archetypes.emplace_back(name, path, size);
+	return archetypes[archetypes.size() - 1];
 }
+/*
+void ObjectsManager::addArchetype(ArchetypeObject&& a){
+	archetypes.emplace_back(a);
+}//*/
+
 
 const std::vector<ArchetypeObject>& ObjectsManager::getArchetypes() const{
 	return archetypes;
