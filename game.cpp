@@ -58,8 +58,8 @@ void Game::run(){
   gf::UI ui2(uiRenderer, layout);
   gf::UI ui3(uiRenderer, layout);
   float scrollArea = 0;
+  std::vector<int> idxObjectVector;
 
-  int idxObject = -1;
   gf::Vector2f mousePosition = {0, 0};
   // Start the game loop
 
@@ -74,11 +74,37 @@ void Game::run(){
           break;
         case gf::EventType::MouseButtonPressed:
           if(event.mouseButton.button == gf::MouseButton::Left){
-            idxObject = objectsManager.getIdxObjectByPosition(Vector2d(event.mouseButton.coords.x, event.mouseButton.coords.y));
+            if(objectsManager.getIdxObjectByPosition(Vector2d(event.mouseButton.coords.x, event.mouseButton.coords.y)) != -1) {
+              bool selected = false;
+              for(uint i = 0; i < idxObjectVector.size();){
+                if(idxObjectVector[i] == objectsManager.getIdxObjectByPosition(Vector2d(event.mouseButton.coords.x, event.mouseButton.coords.y))){
+                  idxObjectVector.erase(idxObjectVector.begin() + i);
+                  selected = true;
+                }
+                else{
+                  i++;
+                }
+              }
+              if(!selected){
+                idxObjectVector.push_back(objectsManager.getIdxObjectByPosition(Vector2d(event.mouseButton.coords.x, event.mouseButton.coords.y)));
+              }
+            }
+            else{
+              idxObjectVector.clear();
+            }
           }
           else if(event.mouseButton.button == gf::MouseButton::Right){
-            if(idxObject >= 0){
-              objectsManager.getObject(idxObject).setGoal(Vector2d(event.mouseButton.coords.x, event.mouseButton.coords.y));
+            if(idxObjectVector.size() > 0){
+              int indexX = 0;
+              int indexY = 0; 
+              for(auto& i : idxObjectVector){
+                objectsManager.getObject(i).setGoal(Vector2d(event.mouseButton.coords.x+(indexX*30), event.mouseButton.coords.y+(indexY*30)));
+                indexX++;
+                if(indexX>10){
+                  indexX = 0;
+                  indexY++;
+                }
+              }
             }
           }
         break;
@@ -86,15 +112,15 @@ void Game::run(){
             mousePosition = event.mouseCursor.coords;
             break;
           case gf::EventType::KeyPressed:
-              if(idxObject >= 0){
-                PhysicObject& obj = objectsManager.getObject(idxObject);
+              if(idxObjectVector.size() > 0){
+                PhysicObject& obj = objectsManager.getObject(idxObjectVector[0]);
                 if(obj.isAlive()){
                   if(event.key.keycode != gf::Keycode::Backspace){
                     objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], obj.getPosition() + Vector2d(0, 30)));
                   }
                   else{
                     obj.kill();
-                    idxObject = -1;
+                    idxObjectVector[0] = -1;
                   }
                 }
               }
@@ -127,6 +153,16 @@ void Game::run(){
     objectsManager.update(dt);
 
     renderer.clear(gf::Color::rgba(39.0f,174.0f,96.0f,255.0f));
+    for(auto& i : idxObjectVector){
+      gf::CircleShape circle({8});
+      circle.setColor(gf::Color::Transparent);
+      circle.setPosition({objectsManager.getObject(i).getPosition().x-1, objectsManager.getObject(i).getPosition().y+8});
+      circle.setAnchor(gf::Anchor::Center);
+      circle.setOutlineColor(gf::Color::Red);
+      circle.setOutlineThickness(2.0f);
+      renderer.draw(circle);
+    }
+
     // Draw the entities
     objectsManager.render(renderer);
 
