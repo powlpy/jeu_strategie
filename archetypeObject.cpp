@@ -12,12 +12,17 @@ ArchetypeObject::ArchetypeObject(ArchetypeObject&& other)
 : name(std::move(other.name)), 
   graphics(std::move(other.graphics)), 
   size(std::move(other.size)),
-  player(other.player),
-  life(other.life),
-  attackContact(other.attackContact),
-  reloadContact(other.reloadContact),
-  speed(other.player)
+  player(std::move(other.player)),
+  life(std::move(other.life)),
+  attackContact(std::move(other.attackContact)),
+  reloadContact(std::move(other.reloadContact)),
+  speed(std::move(other.speed))
 {}
+
+ArchetypeObject::ArchetypeObject(const std::string& _name, const std::string& path, const Vector2d& _size, int _player)
+: ArchetypeObject(_name, GraphicsObject(path), _size, _player)
+{}
+
 
 const std::string& ArchetypeObject::getName() const{
 	return name;

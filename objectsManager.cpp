@@ -17,9 +17,10 @@ ArchetypeObject& ObjectsManager::addArchetype(const std::string& name, const std
 	archetypes.emplace_back(name, path, size);
 	return archetypes[archetypes.size() - 1];
 }
-/*
+//*
 void ObjectsManager::addArchetype(ArchetypeObject&& a){
-	archetypes.emplace_back(a);
+	archetypes.emplace_back(std::move(a));
+	std::cout << archetypes[0].getSpeed() << std::endl;
 }//*/
 
 

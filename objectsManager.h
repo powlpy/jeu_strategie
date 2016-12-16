@@ -20,7 +20,7 @@ public:
 	void render(gf::RenderTarget &target) const;
 	void addObject(const PhysicObject& o);
 	ArchetypeObject& addArchetype(const std::string& name, const std::string& path, const Vector2d& size);
-	//void addArchetype(ArchetypeObject&& a);
+	void addArchetype(ArchetypeObject&& a);
 	const std::vector<ArchetypeObject>& getArchetypes() const;
 	const ArchetypeObject& getArchetype(const std::string& name) const;
 

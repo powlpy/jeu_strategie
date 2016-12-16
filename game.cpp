@@ -15,8 +15,12 @@ Game::Game()
 : graphicsManager(objectsManager)
 {
   //players[0] = Player();
-  ArchetypeObject& a = objectsManager.addArchetype("mage1", "medievalUnit_01.png", Vector2d(30, 30));
+  ArchetypeObject a("mage1", "medievalUnit_01.png", Vector2d(30, 30));
   a.addModuleMoveable(30.);
+  ArchetypeObject& b = objectsManager.addArchetype("mage2", "medievalUnit_01.png", Vector2d(30, 30));
+  b.addModuleMoveable(30.);
+
+  objectsManager.addArchetype(std::move(a));
 
   objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(250, 250)));
   objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(350, 250)));

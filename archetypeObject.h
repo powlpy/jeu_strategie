@@ -26,6 +26,7 @@ class ArchetypeObject{
 
 public:
 	ArchetypeObject(const std::string& _name, GraphicsObject&& _graphic, const Vector2d& _size, int _player = 0);
+	ArchetypeObject(const std::string& _name, const std::string& path, const Vector2d& _size, int _player = 0);
 	ArchetypeObject(ArchetypeObject&& other);
 	const std::string& getName() const;
 	const GraphicsObject& getGraphics() const;
