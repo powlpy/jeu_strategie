@@ -2,22 +2,34 @@
 #include <gf/Shapes.h>
 
 PhysicObject::PhysicObject(const ArchetypeObject& a, const Vector2d& pos)
-: archetype(a), position(pos), velocity(0, 0), goal(pos), alive(true), destroyInNextTic(false)
+: archetype(a), 
+  position(pos), 
+  velocity(0, 0), 
+  goal(pos), 
+  alive(true), 
+  destroyInNextTic(false), 
+  timeReload(0.)
 {}
 
 PhysicObject::PhysicObject(const PhysicObject& p)
-: archetype(p.archetype), position(p.position), velocity(p.velocity), goal(p.goal), alive(p.alive), destroyInNextTic(p.destroyInNextTic)
+: archetype(p.archetype), 
+  position(p.position), 
+  velocity(p.velocity), 
+  goal(p.goal), 
+  alive(p.alive), 
+  destroyInNextTic(p.destroyInNextTic),
+  timeReload(0.)
 {}
 
-// Déclarer à cause de plainte du compilateur
-
+// Déclaré à cause de plaintes du compilateur
 PhysicObject& PhysicObject::operator=(PhysicObject other){
-	//std::swap(archetype, other.archetype);
+	//std::swap(archetype, other.archetype); // not compile
 	std::swap(position, other.position);
 	std::swap(velocity, other.velocity);
 	std::swap(goal, other.goal);
 	std::swap(alive, other.alive);
 	std::swap(destroyInNextTic, other.destroyInNextTic);
+	std::swap(timeReload, other.timeReload);
 	return *this;
 }
 

@@ -14,6 +14,12 @@ class ArchetypeObject{
 	Vector2d size;
 	//ObjectsManager& objectsManager;
 
+	int life;
+	int attackContact;
+	float reloadContact;
+
+	std::vector<std::string> module;
+
 public:
 	ArchetypeObject(const std::string& _name, GraphicsObject&& _graphic, const Vector2d& _size);
 	ArchetypeObject(ArchetypeObject&& other);

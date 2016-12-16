@@ -20,11 +20,12 @@ class PhysicObject : public gf::Entity{
 
 	bool alive;
 	bool destroyInNextTic;
+	float timeReload;
 
 public:
 	PhysicObject(const ArchetypeObject& a, const Vector2d& pos);
 	PhysicObject(const PhysicObject& p);
-	PhysicObject& operator=(PhysicObject); // Déclarer à cause de plainte du compilateur
+	PhysicObject& operator=(PhysicObject); // Déclaré à cause de plaintes du compilateur
 
 	void render(gf::RenderTarget& target) const;
 
