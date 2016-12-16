@@ -14,7 +14,7 @@ Game::Game()
 : graphicsManager(objectsManager)
 {
   //players[0] = Player();
-  objectsManager.addArchetype("bombe", "sprite.png", {200, 200});
+  objectsManager.addArchetype("bombe", "medievalUnit_01.png", {50, 50});
   objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(250, 250)));
 }
 
@@ -78,7 +78,7 @@ void Game::run(){
     float dt = clock.restart().asSeconds();
     objectsManager.update(dt);
 
-    renderer.clear(gf::Color::White);
+    renderer.clear(gf::Color::rgba(39.0f,174.0f,96.0f,255.0f));
     // Draw the entities
     objectsManager.render(renderer);
     renderer.draw(ui1);
