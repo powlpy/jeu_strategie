@@ -48,10 +48,13 @@ Game::Game()
   objectsManager.addArchetype("rocher", "Sprites/Environment/medievalEnvironment_09.png", {30, 30});
  
 
-  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(250, 250)));
-  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(350, 250)));
-  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[1], Vector2d(550, 350)));
-  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[1], Vector2d(550, 400)));
+  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[1], Vector2d(250, 250)));
+  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[1], Vector2d(350, 250)));
+  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[1], Vector2d(250, 350)));
+  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[8], Vector2d(90, 100)));
+  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[9], Vector2d(1180, 540)));
+  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[5], Vector2d(1000, 650)));
+
 }
 
 void Game::run(){
@@ -186,8 +189,16 @@ void Game::run(){
 
     float dt = clock.restart().asSeconds();
     objectsManager.update(dt);
+    
+    gf::Texture texture;
+    texture.loadFromFile("Sprites/map.png");
 
-    renderer.clear(gf::Color::rgba(39.0f,174.0f,96.0f,255.0f));
+    gf::Sprite sprite;
+    sprite.setTexture(texture);
+
+    //renderer.clear(gf::Color::rgba(39.0f,174.0f,96.0f,255.0f));
+    renderer.draw(sprite);
+
     for(auto& i : idxObjectVector){
       gf::CircleShape circle({8});
       circle.setColor(gf::Color::Transparent);
@@ -203,7 +214,7 @@ void Game::run(){
 
     renderer.draw(ui1);
     renderer.draw(ui2);
-    renderer.draw(ui3);
+    //renderer.draw(ui3);
 
     gf::RectangleShape rect({10, 10});
     rect.setColor(gf::Color::Red);
