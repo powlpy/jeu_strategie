@@ -15,6 +15,7 @@ class ObjectsManager{
 	std::vector<PhysicObject> objects; // le type peut etre changé
 	//gf::EntityContainer entitys; // héritage ??? doublon ???
 	std::vector<ArchetypeObject> archetypes; // le type peut etre changé
+	int idxDestroyed;
 
 public:
 	void render(gf::RenderTarget &target) const;
@@ -30,6 +31,7 @@ public:
 	void update(float dt);
 	std::vector<int> getRadius(Vector2d pos, int radius) const;
 	//std::vector<int> getMinRadius(Vector2d pos, int radius) const;
+	int getDestroyedObject() const{return idxDestroyed;}
 };
 
 #endif

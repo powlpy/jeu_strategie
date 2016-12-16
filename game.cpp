@@ -72,6 +72,21 @@ void Game::run(){
   gf::Clock clock;
   while (window.isOpen()) {
 
+    int idxDestroyed = objectsManager.getDestroyedObject();
+    bool retreat = false;
+    if(idxDestroyed >= 0){
+      for(int i = 0; i != idxObjectVector.size(); i++){
+        if(!retreat && idxObjectVector[i] == idxDestroyed){
+          idxObjectVector.erase(idxObjectVector.begin() + i);
+          i--;
+          retreat = true;
+        }
+        else if(idxObjectVector[i] >= idxDestroyed){
+          idxObjectVector[i]--;
+        }
+      }
+    }
+
     for(int i = 0; i != idxObjectVector.size();){
       if(idxObjectVector[i] != -1){
         if(objectsManager.getObject(idxObjectVector[i]).isAlive())
