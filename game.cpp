@@ -15,7 +15,27 @@ Game::Game()
 : graphicsManager(objectsManager)
 {
   //players[0] = Player();
-  objectsManager.addArchetype("bombe", "medievalUnit_01.png", {50, 50});
+  //Archetype unités
+  objectsManager.addArchetype("paysan1", "Sprites/Unit/medievalUnit_06.png", {30, 30});
+  objectsManager.addArchetype("mage1", "Sprites/Unit/medievalUnit_07.png", {30, 30});
+  objectsManager.addArchetype("guerrier1", "Sprites/Unit/medievalUnit_09.png", {30, 30});
+  objectsManager.addArchetype("paysan2", "Sprites/Unit/medievalUnit_24.png", {30, 30});
+  objectsManager.addArchetype("mage2", "Sprites/Unit/medievalUnit_01.png", {30, 30});
+  objectsManager.addArchetype("guerrier2", "Sprites/Unit/medievalUnit_03.png", {30, 30});
+
+  //Archetype batiments
+  objectsManager.addArchetype("base1", "Sprites/Structure/medievalStructure_01.png", {70, 70});
+  objectsManager.addArchetype("base2", "Sprites/Structure/medievalStructure_02.png", {70, 70});
+  objectsManager.addArchetype("maison1", "Sprites/Structure/medievalStructure_03.png", {50, 30});
+  objectsManager.addArchetype("maison2", "Sprites/Structure/medievalStructure_04.png", {50, 30});
+  objectsManager.addArchetype("caserne1", "Sprites/Structure/medievalStructure_05.png", {50, 50});
+  objectsManager.addArchetype("caserne2", "Sprites/Structure/medievalStructure_06.png", {50, 50});
+
+  //Archetype nature
+  objectsManager.addArchetype("arbre", "Sprites/Environment/medievalEnvironment_02.png", {20, 60});
+  objectsManager.addArchetype("rocher", "Sprites/Environment/medievalEnvironment_09.png", {30, 30});
+ 
+
   objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(250, 250)));
   objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(350, 250)));
   objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(250, 350)));
