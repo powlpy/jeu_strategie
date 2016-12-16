@@ -10,16 +10,23 @@
 #include <gf/RenderTarget.h>
 #include "vector2d.h"
 
+class ArchetypeObject;
+
 class PhysicObject : public gf::Entity{
 	const ArchetypeObject& archetype; // peut etre un pointeur intelligent
 	Vector2d position;
 	Vector2d velocity;
 	Vector2d goal;
 
+	bool alive;
+	bool destroyInNextTic;
+	float timeReload;
 
 public:
 	PhysicObject(const ArchetypeObject& a, const Vector2d& pos);
 	PhysicObject(const PhysicObject& p);
+	PhysicObject& operator=(PhysicObject); // Déclaré à cause de plaintes du compilateur
+
 	void render(gf::RenderTarget& target) const;
 
 	void update(float dt);
@@ -29,6 +36,11 @@ public:
 	const ArchetypeObject& getArchetype() const;
 	Vector2d getPosition() const;
 	Vector2d getSize() const;
+	//bool createObject(const std::string& archetypeName);
+
+	bool isAlive() const;
+	bool isDestroyInNextTic() const;
+	void kill();
 };
 
 #endif

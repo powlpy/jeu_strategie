@@ -8,6 +8,7 @@
 #include <gf/Clock.h>
 #include <gf/UI.h>
 #include <gf/Font.h>
+#include <gf/Shape.h>
 
 
 Game::Game()
@@ -16,6 +17,8 @@ Game::Game()
   //players[0] = Player();
   objectsManager.addArchetype("bombe", "medievalUnit_01.png", {50, 50});
   objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(250, 250)));
+  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(350, 250)));
+  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(250, 350)));
 }
 
 void Game::run(){
@@ -29,7 +32,8 @@ void Game::run(){
   gf::UI ui3(uiRenderer, layout);
   float scrollArea = 0;
 
-  PhysicObject* obj = nullptr;
+  int idxObject = -1;
+  gf::Vector2f mousePosition = {0, 0};
   // Start the game loop
 
   gf::Clock clock;
@@ -43,14 +47,31 @@ void Game::run(){
           break;
         case gf::EventType::MouseButtonPressed:
           if(event.mouseButton.button == gf::MouseButton::Left){
-            obj = objectsManager.getObjectByPosition(Vector2d(event.mouseButton.coords.x, event.mouseButton.coords.y));
+            idxObject = objectsManager.getIdxObjectByPosition(Vector2d(event.mouseButton.coords.x, event.mouseButton.coords.y));
           }
           else if(event.mouseButton.button == gf::MouseButton::Right){
-            if(obj != nullptr){
-              obj->setGoal(Vector2d(event.mouseButton.coords.x, event.mouseButton.coords.y));
-              std::cout << obj << std::endl;
+            if(idxObject >= 0){
+              objectsManager.getObject(idxObject).setGoal(Vector2d(event.mouseButton.coords.x, event.mouseButton.coords.y));
             }
           }
+        break;
+          case gf::EventType::MouseMoved:
+            mousePosition = event.mouseCursor.coords;
+            break;
+          case gf::EventType::KeyPressed:
+              if(idxObject >= 0){
+                PhysicObject& obj = objectsManager.getObject(idxObject);
+                if(obj.isAlive()){
+                  if(event.key.keycode != gf::Keycode::Backspace){
+                    objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], obj.getPosition() + Vector2d(0, 30)));
+                  }
+                  else{
+                    obj.kill();
+                    idxObject = -1;
+                  }
+                }
+              }
+            break;
         default:
           break;
       }
@@ -81,9 +102,17 @@ void Game::run(){
     renderer.clear(gf::Color::rgba(39.0f,174.0f,96.0f,255.0f));
     // Draw the entities
     objectsManager.render(renderer);
+
     renderer.draw(ui1);
     renderer.draw(ui2);
     renderer.draw(ui3);
+    
+    gf::RectangleShape rect({10, 10});
+    rect.setColor(gf::Color::Red);
+    rect.setPosition(mousePosition);
+    rect.setAnchor(gf::Anchor::Center);
+    renderer.draw(rect);
+
     renderer.display();
   }
 } 
