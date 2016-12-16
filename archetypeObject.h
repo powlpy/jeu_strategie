@@ -8,8 +8,6 @@
 //class ObjectsManager;
 class GraphicsObject;
 
-const int DIST_ATK_CONTACT = 30; 
-
 class ArchetypeObject{
 	std::string name;
 	GraphicsObject graphics;
@@ -42,6 +40,7 @@ public:
 	int getAttackContact() const{return attackContact;}
 	float getReloadContact() const{return reloadContact;}
 	float getSpeed() const{return speed;}
+	int getPlayer() const{return player;}
 };
 
 #endif

@@ -2,15 +2,18 @@
 #define PHYSIC_OBJECT_H
 
 #include "archetypeObject.h"
+#include "objectsManager.h"
 #include "vector2d.h"
-
 
 #include <gf/Vector.h>
 #include <gf/Entity.h>
 #include <gf/RenderTarget.h>
-#include "vector2d.h"
 
 class ArchetypeObject;
+class ObjectsManager;
+
+const int DIST_ATK_CONTACT = 30;
+const int DIST_VISION_ATK_CONTACT = 200;
 
 class PhysicObject : public gf::Entity{
 	const ArchetypeObject& archetype; // peut etre un pointeur intelligent
@@ -20,6 +23,7 @@ class PhysicObject : public gf::Entity{
 
 	bool alive;
 	bool destroyInNextTic;
+	bool moving;
 
 	int life;
 	float timeReload;
@@ -31,7 +35,7 @@ public:
 
 	void render(gf::RenderTarget& target) const;
 
-	void update(float dt);
+	void update(ObjectsManager& manager, float dt);
 	void setGoal(Vector2d m_goal);
 	void updateVelocity();
 	void setVelocity(Vector2d m_velocity);
@@ -45,6 +49,8 @@ public:
 	void kill();
 	void receiveDegats(int degats);
 	void receiveDegats(const PhysicObject& attacker/*enum type*/);
+	int getPlayer() const;
+	void attack(PhysicObject& other);
 };
 
 #endif

@@ -28,6 +28,8 @@ public:
 	int getIdxObjectByPosition(Vector2d pos);
 	PhysicObject& getObject(int idx);
 	void update(float dt);
+	std::vector<int> getRadius(Vector2d pos, int radius) const;
+	//std::vector<int> getMinRadius(Vector2d pos, int radius) const;
 };
 
 #endif

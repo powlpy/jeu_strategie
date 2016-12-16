@@ -7,7 +7,8 @@ PhysicObject::PhysicObject(const ArchetypeObject& a, const Vector2d& pos)
   velocity(0, 0), 
   goal(pos), 
   alive(true), 
-  destroyInNextTic(false), 
+  destroyInNextTic(false),
+  moving(false),
   life(a.getLife()),
   timeReload(0.)
 {}
@@ -19,7 +20,9 @@ PhysicObject::PhysicObject(const PhysicObject& p)
   goal(p.goal), 
   alive(p.alive), 
   destroyInNextTic(p.destroyInNextTic),
-  timeReload(0.)
+  moving(p.moving),
+  life(p.life),
+  timeReload(p.timeReload)
 {}
 
 // Déclaré à cause de plaintes du compilateur
@@ -48,10 +51,23 @@ void PhysicObject::render(gf::RenderTarget& target) const{
 	target.draw(sprite);
 }
 
-void PhysicObject::update(float dt) {
+void PhysicObject::update(ObjectsManager& manager, float dt) {
 	if(alive){
-		updateVelocity();
-	    position = (position + (velocity * dt * archetype.getSpeed())); 
+		if(timeReload >= 0.)
+			timeReload -= dt;
+
+		std::vector<int> vec = manager.getRadius(position, DIST_VISION_ATK_CONTACT);
+		for(const auto& i : vec){
+			PhysicObject& obj = manager.getObject(i);
+			if(obj.getPlayer() != 0 && obj.getPlayer() != getPlayer()){
+				attack(obj);
+			}
+		}
+
+		if(moving){
+			updateVelocity();
+		    position = (position + (velocity * dt * archetype.getSpeed())); 
+		}
 	}
 	else{
 		destroyInNextTic = true; // TODO mettre un temps de mort
@@ -60,12 +76,17 @@ void PhysicObject::update(float dt) {
 
 void PhysicObject::setGoal(Vector2d m_goal){
 	goal = m_goal;
+	moving = true;
 }
 
 void PhysicObject::updateVelocity(){
 	velocity = goal - position;
-	velocity = velocity.Normal();
-
+	if(velocity.Magnitude() < 1){
+		moving = false;
+	}
+	else{
+		velocity = velocity.Normal();
+	}
 }
 
 void PhysicObject::setVelocity(Vector2d m_velocity) {
@@ -110,4 +131,20 @@ void PhysicObject::receiveDegats(int degats){
 
 void PhysicObject::receiveDegats(const PhysicObject& attacker/*enum type*/){
 	receiveDegats(attacker.getArchetype().getAttackContact());
+}
+
+void PhysicObject::attack(PhysicObject& other){
+	if((position - other.getPosition()).Magnitude() < DIST_ATK_CONTACT){
+		if(timeReload <= 0.){
+			other.receiveDegats(*this);
+			timeReload = archetype.getReloadContact();
+		}
+	}
+	else{
+		setGoal(other.getPosition());
+	}
+}
+
+int PhysicObject::getPlayer() const{
+	return getArchetype().getPlayer();
 }

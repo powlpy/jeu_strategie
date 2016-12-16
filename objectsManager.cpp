@@ -20,7 +20,6 @@ ArchetypeObject& ObjectsManager::addArchetype(const std::string& name, const std
 //*
 void ObjectsManager::addArchetype(ArchetypeObject&& a){
 	archetypes.emplace_back(std::move(a));
-	std::cout << archetypes[0].getSpeed() << std::endl;
 }//*/
 
 
@@ -57,7 +56,7 @@ void ObjectsManager::update(float dt){
 		if(o.isDestroyInNextTic())
 			idxDestroyer = idx;
 		else
-			o.update(dt);
+			o.update(*this, dt);
 		idx++;
 	}
 
@@ -82,3 +81,25 @@ PhysicObject& ObjectsManager::getObject(int idx){
 	}
 	return objects[idx];
 }
+
+std::vector<int> ObjectsManager::getRadius(Vector2d pos, int radius) const{
+	std::vector<int> vec;
+
+	for(int i = 0; i != objects.size(); i++){
+		if((pos - objects[i].getPosition()).Magnitude() < radius){
+			vec.push_back(i);
+		}
+	}
+	return vec;
+}
+/*
+int ObjectsManager::getMinRadius(Vector2d pos, int radius) const{
+	for(int i = 0; i != objects.size(); i++){
+		if(objects[i].isAlive()){
+			if((pos - objects[i].getPosition()).Magnitude() < radius){
+				return i;
+			}
+		}
+	}
+	return -1;
+}//*/
