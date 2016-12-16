@@ -48,12 +48,12 @@ Game::Game()
   objectsManager.addArchetype("rocher", "Sprites/Environment/medievalEnvironment_09.png", {30, 30});
  
 
-  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[1], Vector2d(250, 250)));
-  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[1], Vector2d(350, 250)));
-  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[1], Vector2d(250, 350)));
+  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(250, 250)));
+  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(350, 250)));
+  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], Vector2d(250, 350)));
   objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[8], Vector2d(90, 100)));
   objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[9], Vector2d(1180, 540)));
-  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[5], Vector2d(1000, 650)));
+  objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[1], Vector2d(1000, 650)));
 
 }
 

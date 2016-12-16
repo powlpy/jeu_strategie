@@ -141,7 +141,6 @@ void PhysicObject::attack(ObjectsManager& manager, PhysicObject& other){
 			other.receiveDegats(*this);
 			timeReload = archetype.getReloadContact();
 			manager.addEffect(other.getPosition());
-			std::cout << "a" << std::endl;
 		}
 	}
 	else{
