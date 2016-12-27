@@ -16,11 +16,11 @@ Game::Game()
 {
   //players[0] = Player();
   ArchetypeObject a("mage1", "Sprites/Unit/medievalUnit_07.png", Vector2d(30, 30), 1);
-  a.addModuleMoveable(30.);
+  a.addModuleMoveable(70.);
   a.addModuleLife(6);
   a.addModuleAttackContact(1, 1.f);
   ArchetypeObject b("mage2", "Sprites/Unit/medievalUnit_01.png", Vector2d(30, 30), 2);
-  b.addModuleMoveable(30.);
+  b.addModuleMoveable(70.);
   b.addModuleLife(6);
   b.addModuleAttackContact(1, 1.f);
 
@@ -136,7 +136,7 @@ void Game::run(){
               for(auto& i : idxObjectVector){
                 objectsManager.getObject(i).setGoal(Vector2d(event.mouseButton.coords.x+(indexX*30), event.mouseButton.coords.y+(indexY*30)));
                 indexX++;
-                if(indexX>10){
+                if(indexX > 10){
                   indexX = 0;
                   indexY++;
                 }
@@ -152,7 +152,8 @@ void Game::run(){
                 PhysicObject& obj = objectsManager.getObject(idxObjectVector[0]);
                 if(obj.isAlive()){
                   if(event.key.keycode != gf::Keycode::Backspace){
-                    objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], obj.getPosition() + Vector2d(0, 30)));
+                    if(obj.getArchetype().getName() == "base1")
+                      objectsManager.addObject(PhysicObject(objectsManager.getArchetypes()[0], obj.getPosition() + Vector2d(0, 30)));
                   }
                   else{
                     for(auto& i : idxObjectVector){

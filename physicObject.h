@@ -9,6 +9,8 @@
 #include <gf/Entity.h>
 #include <gf/RenderTarget.h>
 
+#include <functional>
+
 class ArchetypeObject;
 class ObjectsManager;
 
@@ -16,7 +18,7 @@ const int DIST_ATK_CONTACT = 30;
 const int DIST_VISION_ATK_CONTACT = 200;
 
 class PhysicObject : public gf::Entity{
-	const ArchetypeObject& archetype; // peut etre un pointeur intelligent
+	std::reference_wrapper<const ArchetypeObject> archetype; // peut etre un pointeur intelligent
 	Vector2d position;
 	Vector2d velocity;
 	Vector2d goal;
@@ -31,7 +33,7 @@ class PhysicObject : public gf::Entity{
 public:
 	PhysicObject(const ArchetypeObject& a, const Vector2d& pos);
 	PhysicObject(const PhysicObject& p);
-	PhysicObject& operator=(PhysicObject); // Déclaré à cause de plaintes du compilateur
+	//PhysicObject& operator=(const PhysicObject&); // Déclaré à cause de plaintes du compilateur
 
 	void render(gf::RenderTarget& target) const;
 

@@ -26,24 +26,24 @@ PhysicObject::PhysicObject(const PhysicObject& p)
 {}
 
 // Déclaré à cause de plaintes du compilateur
-PhysicObject& PhysicObject::operator=(PhysicObject other){
-	//std::swap(archetype, other.archetype); // not compile
-	std::swap(position, other.position);
-	std::swap(velocity, other.velocity);
-	std::swap(goal, other.goal);
-	std::swap(alive, other.alive);
-	std::swap(destroyInNextTic, other.destroyInNextTic);
-	std::swap(timeReload, other.timeReload);
+/*PhysicObject& PhysicObject::operator=(const PhysicObject& other){
+	archetype = other.getArchetype(); // not compile
+	position =  other.position;
+	velocity =  other.velocity;
+	goal =  other.goal;
+	alive =  other.alive;
+	destroyInNextTic =  other.destroyInNextTic;
+	timeReload =  other.timeReload;
 	return *this;
-}
+}*/
 
 void PhysicObject::render(gf::RenderTarget& target) const{
 	gf::Sprite sprite;
 	if(alive){
-		sprite.setTexture(archetype.getGraphics().getTexture());
+		sprite.setTexture(archetype.get().getGraphics().getTexture());
 	}
 	else{
-		sprite.setTexture(archetype.getGraphics().getTexture()); // TODO
+		sprite.setTexture(archetype.get().getGraphics().getTexture()); // TODO
 	}
 
 	sprite.setPosition({position.x, position.y});
@@ -68,7 +68,7 @@ void PhysicObject::update(ObjectsManager& manager, float dt) {
 
 		if(moving){
 			updateVelocity();
-		    position = (position + (velocity * dt * archetype.getSpeed())); 
+		    position = (position + (velocity * dt * archetype.get().getSpeed())); 
 		}
 	}
 	else{
@@ -83,7 +83,7 @@ void PhysicObject::setGoal(Vector2d m_goal){
 
 void PhysicObject::updateVelocity(){
 	velocity = goal - position;
-	if(velocity.Magnitude() < 1){
+	if(velocity.Magnitude() < 3){
 		moving = false;
 	}
 	else{
@@ -96,7 +96,7 @@ void PhysicObject::setVelocity(Vector2d m_velocity) {
 }
 
 const ArchetypeObject& PhysicObject::getArchetype() const{
-	return archetype;
+	return archetype.get();
 }
 
 Vector2d PhysicObject::getPosition() const{
@@ -104,7 +104,7 @@ Vector2d PhysicObject::getPosition() const{
 }
 
 Vector2d PhysicObject::getSize() const{
-	return archetype.getSize();
+	return archetype.get().getSize();
 }
 /*
 bool PhysicObject::createObject(const std::string& archetypeName){
@@ -139,7 +139,7 @@ void PhysicObject::attack(ObjectsManager& manager, PhysicObject& other){
 	if((position - other.getPosition()).Magnitude() < DIST_ATK_CONTACT){
 		if(timeReload <= 0.){
 			other.receiveDegats(*this);
-			timeReload = archetype.getReloadContact();
+			timeReload = archetype.get().getReloadContact();
 			manager.addEffect(other.getPosition());
 		}
 	}
